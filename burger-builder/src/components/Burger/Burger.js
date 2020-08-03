@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Burger.module.css'
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import {withRouter} from 'react-router-dom'
 
 const burger = (props) => {
     //Array() Makes an array that has x amount empty space
@@ -27,4 +28,4 @@ const burger = (props) => {
         </div>
     );
 }
-export default burger;
+export default withRouter(burger);
