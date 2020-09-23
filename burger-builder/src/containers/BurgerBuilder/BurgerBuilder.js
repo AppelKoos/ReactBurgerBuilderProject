@@ -11,41 +11,42 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/actionIndex';
 import axios from '../../axios-order';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
-        purchaseing: false
+        purchasing: false
     }
 
-    componentDidMount() {
-        this.props.onInitIngredients()
+    componentDidMount () {
+        this.props.onInitIngredients();
     }
 
-    updatePurchaseState = (ingredients) => {
-        const sum = Object.keys(ingredients).map(igKey => {
-            return ingredients[igKey]
-        }).reduce((sum, el) => {
-            return sum + el;
-        }, 0);
+    updatePurchaseState ( ingredients ) {
+        const sum = Object.keys( ingredients )
+            .map( igKey => {
+                return ingredients[igKey];
+            } )
+            .reduce( ( sum, el ) => {
+                return sum + el;
+            }, 0 );
         return sum > 0;
     }
 
     purchaseHandler = () => {
-        if (this.props.s_isAuthed) {
-            this.setState({ purchaseing: true });
+        if (this.props.isAuthenticated) {
+            this.setState( { purchasing: true } );
         } else {
-            this.props.onSetAuthRedirectPath('/checkout')
-            this.props.history.push('/auth')
+            this.props.onSetAuthRedirectPath('/checkout');
+            this.props.history.push('/auth');
         }
     }
 
     purchaseCancelHandler = () => {
-        this.setState({ purchaseing: false });
+        this.setState( { purchasing: false } );
     }
 
-    purchaseContinuehandler = () => {
-        this.props.onInitPurchase()
-        this.props.history.push('/checkout')
-        
+    purchaseContinueHandler = () => {
+        this.props.onInitPurchase();
+        this.props.history.push('/checkout');
     }
 
     render() {
